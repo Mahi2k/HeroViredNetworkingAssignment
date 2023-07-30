@@ -1,0 +1,64 @@
+Question 1 : For 10 Points
+Deploy a website on localhost using either apache2 or nginx. Create a DNS name for this website as ‘awesomevicky.com’. You can use any web template you want or can write your own simple html code. Write a detailed documentation with steps involved.
+
+# STEPS #
+ 
+# Update apt package manager
+	> sudo apt-get update
+
+# Install NGINX in the system
+	> sudo apt-get install nginx
+
+# Check the default configuration of NGINX (it should be inside /etc/nginx/sites-available/).   
+  Check the text inside deafult config file by triggering the command
+	> sudo cat deafult
+
+# Create a config file for awesomevicky.com use command
+	> cd /etc/nginx/sites-available/
+	> sudo nano awesomevicky.com
+
+	# Paste below config settings inside the file
+	server {
+        listen 80;
+        root /var/www/html/awesomevicky.com;
+        index index.html index.htm;
+        server_name awesomevicky.com;
+        location / {
+                try_files $uri $uri/ =404;
+        }
+    }
+
+# Create a symbolic link for this config file from sites-available to sites-enabled folder by using the command
+	> ln -s /etc/nginx/sites-available/awesomevicky.com /etc/nginx/sites-enabled/
+
+# Till now we have created a config for the domain name now we need to create a website with the same folder name and index.html file inside it
+	> cd /var/www/html
+	> sudo mkdir awesomevicky.com
+	> cd awesomevicky.com/
+	> sudo nano index.html
+	
+# Add below html code in index.html file and save it
+	<html>
+        <head>
+	        <title>AWESOME VICKY SERVER</title>
+        </head>
+        <body>
+            <section>
+                <h1>Welcome to Environment NGNIX SERVER</h1>
+                <p>This is the first example for creating NGINX SERVER</p>
+            </section>
+        </body>
+    </html>
+
+# Restart the nginx server
+    > sudo systemctl restart nginx
+
+# Still website with domain name will not work since we have not added a DNS entry
+    # In windows we have to add an entry in the host file for redirecting the website domain to localhost web server. It is present inside "c:/windows/system32/driver/etc/"
+    > Add entry as below 
+        127.0.0.1	awesomevicky.com
+        ::1         awesomevicky.com
+
+# After saving this file go to chrome and hit the domain "awesomevicky.com"
+
+# Viola..!! Website is working.
