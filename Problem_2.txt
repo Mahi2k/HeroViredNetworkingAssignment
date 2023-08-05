@@ -1,3 +1,5 @@
+# Git: https://github.com/Mahi2k/HeroViredNetworkingAssignment
+
 Question 2 : For 10 Points
 A website can have many subdomains and different services are running on them. Write a Python script to check the status of the subdomains which are up or down. The script should automatically check the status every min and should update it in tabular format on the screen. Write a detailed documentation of it. 
 
@@ -68,5 +70,7 @@ A website can have many subdomains and different services are running on them. W
     > qa.awesomevicky.com
 
 13# Create a python script that will monitor the domain and subdomain and will print the status every minute on the console
-
-    
+    > We can easily do it using http library that will hit the webservers and check the status codes in a while loop
+    > Also we will use a python library called as urllib
+    > Use utility as time for time intervals
+    > Created a file called as scanner.py

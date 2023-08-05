@@ -1,0 +1,47 @@
+# Git: https://github.com/Mahi2k/HeroViredNetworkingAssignment
+
+1. Download VirtualBox for windows 
+2. Download UBUNTU Virtual Disc Image to a folder (I used kali linux)
+3. Open Oracle Virtual box manager
+4. Click on NEW (*) sign given in the UI to add a new Virtual Machine
+4. Add Name of the server
+5. Check if resources allocated to virtual machine is proper and up to the mark.
+6. Add the UBUNTU Virtual disc image to the virtual machine, also select type and version as Linux and Ubuntu(64 Bit) respectively
+7. Provide base memory as 4096 mb and 2 cpu to the in ahrdware section, click on finish
+8. Your newly created virtual machine should come in the list, select and hit start button.
+9. Wait for some time and your virtual machine will appear in a new window.
+10. Now as per assignmnet we need to install nginx and host a website, for the sake of time I hosted default website
+11. 1# Update apt package manager
+	> sudo apt-get update
+
+    2# Install NGINX in the system
+        > sudo apt-get install nginx
+
+    3# Check the default configuration of NGINX (it should be inside /etc/nginx/sites-available/).   
+    Check the text inside deafult config file by triggering the command
+        > sudo cat deafult
+
+    4# Create a config file for awesomevicky.com use command
+        > cd /etc/nginx/sites-available/
+        > sudo nano awesomevicky.com
+
+        # Paste below config settings inside the file
+        server {
+            listen 80;
+            root /var/www/html/awesomevicky.com;
+            index index.html index.htm;
+            server_name awesomevicky.com;
+            location / {
+                    try_files $uri $uri/ =404;
+            }
+        }
+
+    5# Create a symbolic link for this config file from sites-available to sites-enabled folder by using the command
+        > ln -s /etc/nginx/sites-available/awesomevicky.com /etc/nginx/sites-enabled/
+
+    6# Restart the nginx server
+    > sudo systemctl restart nginx
+
+12. Now come to host machine and open NMAP
+13. Scan the port that you just started with nginx in virtual machine.
+14. Observe the Open ports

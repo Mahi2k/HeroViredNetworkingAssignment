@@ -1,19 +1,21 @@
+# Git: https://github.com/Mahi2k/HeroViredNetworkingAssignment
+
 Question 1 : For 10 Points
 Deploy a website on localhost using either apache2 or nginx. Create a DNS name for this website as ‘awesomevicky.com’. You can use any web template you want or can write your own simple html code. Write a detailed documentation with steps involved.
 
 # STEPS #
  
-# Update apt package manager
+1# Update apt package manager
 	> sudo apt-get update
 
-# Install NGINX in the system
+2# Install NGINX in the system
 	> sudo apt-get install nginx
 
-# Check the default configuration of NGINX (it should be inside /etc/nginx/sites-available/).   
+3# Check the default configuration of NGINX (it should be inside /etc/nginx/sites-available/).   
   Check the text inside deafult config file by triggering the command
 	> sudo cat deafult
 
-# Create a config file for awesomevicky.com use command
+4# Create a config file for awesomevicky.com use command
 	> cd /etc/nginx/sites-available/
 	> sudo nano awesomevicky.com
 
@@ -28,16 +30,17 @@ Deploy a website on localhost using either apache2 or nginx. Create a DNS name f
         }
     }
 
-# Create a symbolic link for this config file from sites-available to sites-enabled folder by using the command
+5# Create a symbolic link for this config file from sites-available to sites-enabled folder by using the command
 	> ln -s /etc/nginx/sites-available/awesomevicky.com /etc/nginx/sites-enabled/
 
-# Till now we have created a config for the domain name now we need to create a website with the same folder name and index.html file inside it
+6# Till now we have created a config for the domain name now we need to create a website with the same folder name and index.html file inside it
 	> cd /var/www/html
 	> sudo mkdir awesomevicky.com
+    > sudo chown -R www-data:www-data /var/www/html/awesomevicky.com #This provides permission to read and write the files in folder
 	> cd awesomevicky.com/
 	> sudo nano index.html
 	
-# Add below html code in index.html file and save it
+7# Add below html code in index.html file and save it
 	<html>
         <head>
 	        <title>AWESOME VICKY SERVER</title>
@@ -50,15 +53,15 @@ Deploy a website on localhost using either apache2 or nginx. Create a DNS name f
         </body>
     </html>
 
-# Restart the nginx server
+8# Restart the nginx server
     > sudo systemctl restart nginx
 
-# Still website with domain name will not work since we have not added a DNS entry
+9# Still website with domain name will not work since we have not added a DNS entry
     # In windows we have to add an entry in the host file for redirecting the website domain to localhost web server. It is present inside "c:/windows/system32/driver/etc/"
     > Add entry as below 
         127.0.0.1	awesomevicky.com
         ::1         awesomevicky.com
 
-# After saving this file go to chrome and hit the domain "awesomevicky.com"
+10# After saving this file go to chrome and hit the domain "awesomevicky.com"
 
-# Viola..!! Website is working.
+11# Voila..!! Website is working.
